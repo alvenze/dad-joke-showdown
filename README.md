@@ -12,7 +12,7 @@ One dad joke, written to `/output/entry.txt`:
 
 > My son said, "Dad, the smoke alarm keeps chirping." I said, "Low battery, son. It gets that from me."
 
-103 characters, one line. A chirping smoke alarm really does mean a low
+101 characters, one line. A chirping smoke alarm really does mean a low
 battery; the turn is the dad calmly claiming the fault as his own. Two
 beats, a second voice, and the confession lands as the last line, the
 way a father would deliver it across the dinner table.

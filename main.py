@@ -19,14 +19,23 @@ def check(text: str) -> None:
     assert 1 <= len(text) <= 200, "gate: entry must be 1-200 characters"
     assert text.strip(), "gate: entry must not be only white space"
     assert "\n" not in text, "gate: entry is a single line"
+    assert all(ord(c) >= 0x20 for c in text), "gate: no control characters"
     text.encode("utf-8").decode("utf-8")
 
 
 def main() -> int:
-    out = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/output/entry.txt")
+    args = sys.argv[1:]
+    if args[:1] == ["--check"]:
+        check(JOKE)
+        print(f"gate check passed: {len(JOKE)} characters, one line")
+        return 0
+    out = Path(args[0]) if args else Path("/output/entry.txt")
     check(JOKE)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(JOKE, encoding="utf-8")
+    written = out.read_bytes().decode("utf-8")
+    assert written == JOKE, "round-trip: file on disk differs from the joke"
+    check(written)
     print(f"wrote {len(JOKE)} characters to {out}")
     return 0
 
